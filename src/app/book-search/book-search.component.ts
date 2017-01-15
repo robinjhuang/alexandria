@@ -1,0 +1,39 @@
+import { Component, OnInit } from '@angular/core';
+import { GoodReadsService } from '../goodreads.service';
+
+@Component({
+  selector: 'book-search',
+  templateUrl: './book-search.component.html',
+  styleUrls: ['./book-search.component.css']
+})
+export class BookSearchComponent {
+  searchResult: any;
+  private searchResultString: String;
+  searchQuery: String;
+  errorMessage: any;
+
+  // Field Data
+  private srTitle: String;
+  private srAuthor: String;
+
+  constructor(private goodReadsService: GoodReadsService) { }
+
+  findBookOnGoodReads(ISBN: string) {
+		this.goodReadsService.searchGoodReads(ISBN)
+      .subscribe(
+        searchResult => {
+          this.searchResult = searchResult;
+          console.log(searchResult);
+          this.extractData();
+          },
+        error => this.errorMessage = <any> error
+      );
+    
+  }
+
+  extractData():void {
+    this.srTitle = this.searchResult.book[0].title[0];
+    this.srAuthor = this.searchResult.book[0].authors[0].author[0].name[0];
+  }
+
+}

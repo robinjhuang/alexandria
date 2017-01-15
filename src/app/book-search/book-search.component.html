@@ -1,0 +1,10 @@
+
+<div class="container">
+  <input type="text" name="BookSearch" #searchBox (keyup.enter)="findBookOnGoodReads(searchBox.value)">
+  <div class="row">
+    <div class="bookSearchDisplay" *ngIf="searchResult">
+      <h4>Title: {{srTitle}} </h4>
+      <h4>Author: {{srAuthor}} </h4>
+    </div>
+  </div>
+</div>
