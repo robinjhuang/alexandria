@@ -15,8 +15,12 @@ export class BookSearchComponent {
   // Field Data
   private srTitle: String;
   private srAuthor: String;
+  private srDescription: String;
+  private srimageURL: String;
 
-  constructor(private goodReadsService: GoodReadsService) { }
+  constructor(private goodReadsService: GoodReadsService) {
+    this.srimageURL = "";
+   }
 
   findBookOnGoodReads(ISBN: string) {
 		this.goodReadsService.searchGoodReads(ISBN)
@@ -32,8 +36,11 @@ export class BookSearchComponent {
   }
 
   extractData():void {
+    this.srimageURL = this.searchResult.book[0].image_url[0];
     this.srTitle = this.searchResult.book[0].title[0];
     this.srAuthor = this.searchResult.book[0].authors[0].author[0].name[0];
+    this.srDescription = this.searchResult.book[0].description[0];
+    
   }
 
 }
