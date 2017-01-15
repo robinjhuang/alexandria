@@ -1,4 +1,5 @@
-# Alexandria
+# Alexandria Book Sharing
+Alexandria was the greatest library in the world, when the Egyptian Empire was at its height. Now, we will revive that great library in the 21st Century - online. 
 
 This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.25.5.
 
