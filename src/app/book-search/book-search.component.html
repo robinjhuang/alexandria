@@ -11,7 +11,7 @@
       <img [src]="srimageURL" alt="Description" />
       <h4>Title: {{srTitle}} </h4>
       <h4>Author: {{srAuthor}} </h4>
-      <p>{{srDescription}}</p>
+      <p [innerHTML] = "srDescription"></p>
     </div>
   </div>
 </div>

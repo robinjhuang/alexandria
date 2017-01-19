@@ -19,7 +19,7 @@ export class GoodReadsService {
     //console.log("The entered ISBN is: " + ISBN);
     let params = new URLSearchParams();
     params.set('searchQuery', ISBN);
-    return this.http.get('/api/posts', {search: params})
+    return this.http.get('/goodReadsApi/searchBook', {search: params})
           .map(this.extractData)
           .catch(this.handleError);
 			
