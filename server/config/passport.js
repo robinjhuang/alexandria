@@ -43,9 +43,22 @@ module.exports = function(passport) {
         console.log("FACEBOOK PROFILE", profile);
         // asynchronous
         process.nextTick(function() {
+            User.findOrCreate({where: {fb_id: profile.id}, 
+                defaults: {
+                    access_token : 		access_token, // we will save the token that facebook provides to the user	                
+	                first_name : 		profile.name.givenName,
+	                last_name : 		profile.name.familyName, // look at the passport user profile to see how names are returned
+	                email : 			profile.emails[0].value, // facebook can return multiple emails so we'll take the first
+	                profilePictureURL : profile.photos[0].value
+                }})
+                .spread(function (user, created){
+                    done(null, user);
+                }).error(function(err){
+                    throw(err);
+                });
 
             console.log("SAVING FACEBOOK PROFILE");
-			User
+			/*User
       			.create({
 					fb_id : 			profile.id, // set the users facebook id	                
 	                access_token : 		access_token, // we will save the token that facebook provides to the user	                
@@ -56,7 +69,7 @@ module.exports = function(passport) {
 
 				})
 				.then(user => done(null, user))
-				.catch(error => {throw error});
+				.catch(error => {throw error});*/
             
         });
 
