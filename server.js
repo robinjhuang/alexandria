@@ -18,7 +18,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(session({
     secret: 'knowledgeIsPower', // session secret
-    saveUninitialized: true
+    saveUninitialized: true,
+    resave: true
 }));
 app.use(passport.initialize());
 app.use(passport.session());
