@@ -1,4 +1,18 @@
-<div *ngIf="User"> 
-    <img [src]="UserPictureURL" alt="Description" />
-    <h1> Hello {{UserFirstName}} {{UserLastName}}</h1>
+<div class="container-fluid">
+    <div class="row" *ngIf="User"> 
+        <div class="col-sm-6 col-sm-offset-3 myProfile">
+            <img [src]="UserPictureURL" alt="Description" />
+            <h1> Hello {{UserFirstName}} {{UserLastName}}</h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3 myLibrary">
+            <h2>Your Library</h2>
+            <ul>
+                <li>The Great Gatsby</li>
+                <li>A Wild Sheep Chase</li>
+            </ul>
+        </div>
+    </div>
+
 </div>
