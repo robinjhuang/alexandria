@@ -1,24 +1,24 @@
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     fb_id: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     access_token: {
-      type: DataTypes.STRING,
+      type: DataTypes.TEXT,
       allowNull: false,
     },
     first_name: {
-      type: DataTypes.STRING
+      type: DataTypes.TEXT
     },
     last_name : { 
-      type: DataTypes.STRING
+      type: DataTypes.TEXT
     },
     email: {
-      type: DataTypes.STRING
+      type: DataTypes.TEXT
     },
     profilePictureURL: {
-      type: DataTypes.STRING
+      type: DataTypes.TEXT
     }
   }, {
     classMethods: {

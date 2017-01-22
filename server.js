@@ -3,17 +3,21 @@ const express = require('express');
 const path = require('path');
 const http = require('http');
 const bodyParser = require('body-parser');
-
+const cookieParser = require('cookie-parser');
+var passport = require('passport');
+var session = require('express-session');
 // Define Express App
 const app = express();
 
+
+// Point static path to dist
+app.use(express.static(path.join(__dirname, 'dist')));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 // Configuring Passport
-var passport = require('passport');
-var session = require('express-session');
-// TODO - Why Do we need this key ?
+app.use(cookieParser());
 app.use(session({
     secret: 'knowledgeIsPower', // session secret
-    resave: true,
     saveUninitialized: true
 }));
 app.use(passport.initialize());
@@ -25,14 +29,6 @@ require('./server/config/passport')(passport);
 // Get our API routes
 const goodReadsApi = require('./server/routes/goodReadsApi');
 const authenticationRouter = require ('./server/routes/authenticationRouter')(passport);
-
-// Parsers for POST data
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: false }));
-
-
-// Point static path to dist
-app.use(express.static(path.join(__dirname, 'dist')));
 
 // Set our api routes
 app.use('/goodReadsApi', goodReadsApi);
