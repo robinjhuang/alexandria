@@ -8,12 +8,21 @@ module.exports = function(passport) {
 
     // used to serialize the user for the session
     passport.serializeUser(function(user, cb) {
+        console.log("USER.ID = " + user.fb_id);
         cb(null, user);
     });
 
     // used to deserialize the user
-    passport.deserializeUser(function(obj, cb) {
-        cb(null, obj);
+    passport.deserializeUser(function(obj, done) {
+        User.findOne( {where: {id : obj.id} }).then(
+            function (user) {
+                done(null, user);
+            },
+            function (err) {
+                console.log(err);
+                done(err, null);
+            }
+        );
     });
 
     // =========================================================================
