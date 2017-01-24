@@ -4,13 +4,14 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { RouterModule } from '@angular/router';
+import { MaterialModule } from '@angular/material';
 
 /* Components */
 import { AppComponent } from './app.component';
 import { BookSearchComponent } from './book-search/book-search.component';
 import { FbloginComponent } from './fblogin/fblogin.component';
 import { ProfileComponent } from './profile/profile.component';
-
+import { MainNavComponent } from './main-nav/main-nav.component';
 /* Services */
 import { FbloginService } from './fblogin/fblogin.service';
 import { GoodReadsService } from './goodreads.service';
@@ -43,7 +44,8 @@ const ROUTES = [
     FormsModule,
     HttpModule,
     JsonpModule, 
-    RouterModule.forRoot(ROUTES) // Add routes to the app
+    RouterModule.forRoot(ROUTES),
+    MaterialModule.forRoot()
   ],
   providers: [GoodReadsService, FbloginService],
   bootstrap: [AppComponent]

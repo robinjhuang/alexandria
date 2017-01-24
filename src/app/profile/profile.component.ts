@@ -4,7 +4,7 @@ import { FbloginService } from '../fblogin/fblogin.service';
 @Component({
   selector: 'profile',
   templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.css']
+  styleUrls: ['./profile-header.component.css', './profile-library.component.css']
 })
 
 export class ProfileComponent implements OnInit {

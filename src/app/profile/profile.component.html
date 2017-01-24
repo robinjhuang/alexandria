@@ -1,18 +1,35 @@
 <div class="container-fluid">
-    <div class="row" *ngIf="User"> 
-        <div class="col-sm-6 col-sm-offset-3 myProfile">
-            <img [src]="UserPictureURL" alt="Description" />
-            <h1> Hello {{UserFirstName}} {{UserLastName}}</h1>
+    <article class="profile">
+        <div class="row" *ngIf="User"> 
+            <header class="profileHeader">
+                <div class="profilePictureWrapper1 col-sm-3 col-sm-offset-1">
+                    <div class="profilePictureWrapper2">
+                        <button class="changeProfilePicture" title="Change profile photo">
+                            <img [src]="UserPictureURL" alt="Description" />
+                        </button>
+                    </div>
+                </div>
+                <div class="profileDetails col-sm-8">
+                        <div><h1 id="profileName"> {{UserFirstName}} {{UserLastName}}</h1></div>
+                        <div><a class="editProfileForm" href="/accounts/edit">
+                            <span><button>Edit Profile</button></span></a>
+                        </div>
+                        <div class="dotdotdot"><a class="btn btn-default btn-sm" href="#"><i class="fa fa-cog"></i> Settings</a></div>
+                </div> 
+            </header>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-sm-6 col-sm-offset-3 myLibrary">
-            <h2>Your Library</h2>
-            <ul>
-                <li>The Great Gatsby</li>
-                <li>A Wild Sheep Chase</li>
-            </ul>
-        </div>
-    </div>
+    </article>
+    <article class="profile">
+        <div class="row">
+            <div class="col-sm-12 myLibrary md-app-background">  
+                <md-tab-group color="primary" layout-align="center end" style="min-height: 500px" layout="column"> 
+                    <md-tab class="libTab" label="My Library">Content 1</md-tab>
+                    <md-tab class="libTab" label="Lent Out">Content 2</md-tab>
+                </md-tab-group>
+                
 
+            </div>
+        </div>   
+    </article>   
+    
 </div>
