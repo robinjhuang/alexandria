@@ -7,11 +7,11 @@
     </div>
   </div>
   <div class="row">
-    <div class="bookSearchDisplay" *ngIf="searchResult">
-      <img [src]="srimageURL" alt="Description" />
-      <h4>Title: {{srTitle}} </h4>
-      <h4>Author: {{srAuthor}} </h4>
-      <p [innerHTML] = "srDescription"></p>
+    <div class="bookSearchDisplay" *ngIf="resultBook">
+      <img [src]="resultBook.image_url" alt="Description" />
+      <h4>Title: {{resultBook.title}} </h4>
+      <h4>Author: {{resultBook.author}} </h4>
+      <p [innerHTML] = "resultBook.description"></p>
     </div>
   </div>
 </div>
