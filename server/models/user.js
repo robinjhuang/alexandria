@@ -1,30 +1,20 @@
-module.exports = (sequelize, DataTypes) => {
-  const User = sequelize.define('User', {
-    fb_id: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-    },
-    access_token: {
-      type: DataTypes.TEXT,
-      allowNull: false,
-    },
-    first_name: {
-      type: DataTypes.TEXT
-    },
-    last_name : { 
-      type: DataTypes.TEXT
-    },
-    email: {
-      type: DataTypes.TEXT
-    },
-    profilePictureURL: {
-      type: DataTypes.TEXT
-    }
+'use strict';
+module.exports = function(sequelize, DataTypes) {
+  var User = sequelize.define('User', {
+    fb_id: DataTypes.STRING,
+    access_token: DataTypes.TEXT,
+    first_name: DataTypes.STRING,
+    last_name: DataTypes.STRING,
+    email: DataTypes.TEXT,
+    profilePictureURL: DataTypes.TEXT,
+    library: DataTypes.ARRAY(DataTypes.STRING)
   }, {
+    underscored: true,
     classMethods: {
-      
-    },
+      associate: function(models) {
+        // associations can be defined here
+      }
+    }
   });
-
   return User;
-}
+};

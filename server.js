@@ -30,10 +30,11 @@ require('./server/config/passport')(passport);
 // Get our API routes
 const goodReadsApi = require('./server/routes/goodReadsApi');
 const authenticationRouter = require ('./server/routes/authenticationRouter')(passport);
-
+const bookRouter = require('./server/routes/bookRouter');
 // Set our api routes
 app.use('/goodReadsApi', goodReadsApi);
 app.use('/authenticate', authenticationRouter);
+app.use('/book', bookRouter);
 
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {

@@ -1,3 +1,4 @@
+'use strict';
 module.exports = {
   up: function(queryInterface, Sequelize) {
     return queryInterface.createTable('Users', {
@@ -8,17 +9,16 @@ module.exports = {
         type: Sequelize.INTEGER
       },
       fb_id: {
-        type: Sequelize.TEXT
+        type: Sequelize.STRING
       },
       access_token: {
-        type: Sequelize.TEXT,
-        allowNull: false,
+        type: Sequelize.TEXT
       },
       first_name: {
-        type: Sequelize.TEXT
+        type: Sequelize.STRING
       },
-      last_name : { 
-        type: Sequelize.TEXT
+      last_name: {
+        type: Sequelize.STRING
       },
       email: {
         type: Sequelize.TEXT
@@ -26,11 +26,14 @@ module.exports = {
       profilePictureURL: {
         type: Sequelize.TEXT
       },
-      createdAt: {
+      library: {
+        type: Sequelize.ARRAY(Sequelize.STRING)
+      },
+      created_at: {
         allowNull: false,
         type: Sequelize.DATE
       },
-      updatedAt: {
+      updated_at: {
         allowNull: false,
         type: Sequelize.DATE
       }

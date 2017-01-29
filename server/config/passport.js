@@ -49,7 +49,8 @@ module.exports = function(passport) {
 	                first_name : 		profile.name.givenName,
 	                last_name : 		profile.name.familyName, // look at the passport user profile to see how names are returned
 	                email : 			profile.emails[0].value, // facebook can return multiple emails so we'll take the first
-	                profilePictureURL : profile.photos[0].value
+	                profilePictureURL : profile.photos[0].value,
+                    library: []
                 }})
                 .spread(function (user, created){
                     done(null, user);
