@@ -6,12 +6,15 @@
       <input id="bookSearchBox" type="text" name="BookSearch" placeholder="Search by ISBN" #searchBox (keyup.enter)="findBookOnGoodReads(searchBox.value)">
     </div>
   </div>
-  <div class="row">
-    <div class="bookSearchDisplay" *ngIf="resultBook">
+  <div class="row" *ngIf="resultBook">
+    <div class="col-sm-8 bookSearchDisplay">
       <img [src]="resultBook.image_url" alt="Description" />
       <h4>Title: {{resultBook.title}} </h4>
       <h4>Author: {{resultBook.author}} </h4>
       <p [innerHTML] = "resultBook.description"></p>
+    </div>
+    <div class="col-sm-4 addBook">
+      <a class="btn btn-default" href="#" role="button" (click)="addToLibrary()">Add Book</a>
     </div>
   </div>
 </div>

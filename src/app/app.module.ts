@@ -15,6 +15,7 @@ import { MainNavComponent } from './main-nav/main-nav.component';
 /* Services */
 import { FbloginService } from './fblogin/fblogin.service';
 import { GoodReadsService } from './goodreads.service';
+import { BookService } from './book-search/book/book.service';
 // Define the routes
 const ROUTES = [
   {
@@ -47,7 +48,7 @@ const ROUTES = [
     RouterModule.forRoot(ROUTES),
     MaterialModule.forRoot()
   ],
-  providers: [GoodReadsService, FbloginService],
+  providers: [GoodReadsService, FbloginService, BookService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

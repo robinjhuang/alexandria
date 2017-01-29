@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { GoodReadsService } from '../goodreads.service';
+import { BookService } from './book/book.service';
 import { Book } from './book/book';
 @Component({
   selector: 'book-search',
@@ -26,7 +27,7 @@ export class BookSearchComponent {
   
   private resultBook: Book;
 
-  constructor(private goodReadsService: GoodReadsService) {
+  constructor(private goodReadsService: GoodReadsService, private bookService: BookService) {
     this.srimageURL = "";
    }
 
@@ -40,7 +41,15 @@ export class BookSearchComponent {
           },
         error => this.errorMessage = <any> error
       );
-    
+  }
+
+  addToLibrary():void {
+    console.log("trying to save book");
+    this.bookService.saveBook(this.resultBook)
+      .subscribe(
+        result => {console.log(result);},
+        error => console.log(error)
+      );
   }
 
   extractData():void {
