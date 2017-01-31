@@ -9,7 +9,7 @@ const User = require('../models').User;
 const Book = require('../models').Book;
 router.post('/addBook', (req, res) => {
 	console.log(req.body);
-	Book.findOrCreate({ where: {isbn: req.body._isbn },
+	Book.findOrCreate({ where: {isbn: req.body._isbn, owner: req.user.fb_id },
 		defaults: {
 			title: req.body._title,
 			author: req.body._author,
@@ -19,15 +19,44 @@ router.post('/addBook', (req, res) => {
 			avg_rating: req.body._avg_rating,
 			num_pages: req.body._num_pages,
 			publisher: req.body._publisher,
-			gr_url: req.body._gr_url
+			gr_url: req.body._gr_url,
+			owner: req.user.fb_id,
+			checked_out: false
+
+
 		}})
 		.spread(function (book, created){
-             //res.status(200).json("an object");
+             res.status(200).json(book);
         }).error(function(err){
             throw(err);
         });
 	
-	// CHECK IF BOOK IS ALREADY IN LIBRARY
+	
+});
+
+
+router.get('/getLibrary', function (req, res) {
+		if (req.user != null){
+			Book.findAll({
+				where: {
+					owner: req.user.fb_id
+				}
+			})
+			.then((books) => {
+				console.log(books);
+				res.status(200).json(books);
+			})
+			.catch((error) => res.status(400).json(error));
+		}
+		else 
+			res.redirect('/');
+});
+
+
+module.exports = router;
+
+
+	/* CHECK IF BOOK IS ALREADY IN LIBRARY
 	if (!req.user.library.includes(req.body._isbn)) {
 		req.user.library.push(req.body._isbn); 
 	}
@@ -42,7 +71,7 @@ router.post('/addBook', (req, res) => {
 		res.status(200).json("Book is added");
 	});
 
-	/*User.update(req.user, {
+	User.update(req.user, {
 		where: {
 			fb_id: req.user.fb_id
 		}
@@ -68,21 +97,3 @@ router.post('/addBook', (req, res) => {
 		}).error(function(err){
 			res.status(500).json(err);
 		});*/
-	
-});
-
-
-
-router.get ('/getAllBooks', (req, res) => {
-	User.findAll({
-		include: Book
-	})
-		.then(function (books) {
-			res.status(200).json(books);
-		})
-		.catch(function (error) {
-			res.status(500).json(error);
-		});
-});
-
-module.exports = router;

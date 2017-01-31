@@ -65,7 +65,7 @@ export class BookSearchComponent {
     this.publisher = this.searchResult.book[0].publisher[0];
     this.gr_url = this.searchResult.book[0].url[0];
     
-    this.resultBook = new Book (this.srTitle, this.srAuthor, this.isbn, this.isbn13, this.srDescription, this.srimageURL, this.avg_rating, this.num_pages, this.publisher, this.gr_url);
+    this.resultBook = new Book (this.srTitle, this.srAuthor, this.isbn, this.isbn13, this.srDescription, this.srimageURL, this.avg_rating, this.num_pages, this.publisher, this.gr_url, null, false, new Date(), null, 5);
   }
 
 }
