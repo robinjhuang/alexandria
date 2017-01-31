@@ -1,0 +1,6 @@
+<div *ngIf = "book" class="col-sm-8 bookSearchDisplay">
+    <img [src]="book.image_url" alt="Description" />
+    <h4>Title: {{book.title}} </h4>
+    <h4>Author: {{book.author}} </h4>
+    <p [innerHTML] = "book.description"></p>
+</div>

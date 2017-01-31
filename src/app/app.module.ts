@@ -12,6 +12,7 @@ import { BookSearchComponent } from './book-search/book-search.component';
 import { FbloginComponent } from './fblogin/fblogin.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
+import { BookComponent } from './book-search/book/book.component';
 /* Services */
 import { FbloginService } from './fblogin/fblogin.service';
 import { GoodReadsService } from './goodreads.service';
@@ -38,7 +39,8 @@ const ROUTES = [
     AppComponent,
     BookSearchComponent,
     FbloginComponent,
-    ProfileComponent
+    ProfileComponent,
+    BookComponent
   ],
   imports: [
     BrowserModule,
