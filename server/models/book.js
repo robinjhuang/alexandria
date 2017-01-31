@@ -10,7 +10,13 @@ module.exports = function(sequelize, DataTypes) {
     avg_rating: DataTypes.DOUBLE,
     num_pages: DataTypes.INTEGER,
     publisher: DataTypes.STRING,
-    gr_url: DataTypes.TEXT
+    gr_url: DataTypes.TEXT,
+
+    owner: DataTypes.STRING,
+    checked_out: DataTypes.BOOLEAN,
+    checked_out_date: DataTypes.DATE,
+    due_date: DataTypes.DATE,
+    price: DataTypes.DOUBLE
   }, {
     underscored: true,
     classMethods: {

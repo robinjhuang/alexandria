@@ -9,8 +9,13 @@ export class Book {
     private _num_pages: number;
     private _publisher: string;
     private _gr_url: string;
+    private _owner: string;
+    private _checked_out: Boolean;
+    private _checked_out_date: Date;
+    private _due_date: Date;
+    private _price: number;
 
-    constructor (title: string, author: string, isbn: string, isbn13: string, description: string, image_url: string, avg_rating: number, num_pages: number, publisher: string, gr_url: string) {
+    constructor (title: string, author: string, isbn: string, isbn13: string, description: string, image_url: string, avg_rating: number, num_pages: number, publisher: string, gr_url: string, owner: string, checked_out: Boolean, checked_out_date: Date, due_date: Date, price: number) {
         this._title = title;
         this._author = author;
         this._isbn = isbn;
@@ -21,6 +26,10 @@ export class Book {
         this._num_pages = num_pages;
         this._publisher = publisher;
         this._gr_url = gr_url;
+        this._owner = owner;
+        this._checked_out = checked_out;
+        this._due_date = due_date;
+        this._price = price;
     }
 
     get title():string {
@@ -61,6 +70,26 @@ export class Book {
 
     get gr_url():string {
         return this._gr_url;
+    }
+
+    get owner():string {
+        return this._owner;
+    }
+
+    get checked_out(): Boolean {
+        return this._checked_out;
+    }
+
+    get checked_out_date(): Date {
+        return this._checked_out_date;
+    }
+
+    get due_date(): Date {
+        return this._due_date;
+    }
+
+    get price(): number {
+        return this._price;
     }
 
 }
