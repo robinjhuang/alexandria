@@ -3,6 +3,7 @@ import { Headers, Http, Response, URLSearchParams, QueryEncoder } from '@angular
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 import { Observable }     from 'rxjs/Observable';
 
 @Injectable()
@@ -27,22 +28,18 @@ export class GoodReadsService {
 
   private extractData(res: Response) {
     let body = res.json();
-    //console.log(body);
+    console.log("returned from server");
+    console.log(body);
     return body.GoodreadsResponse || { };
   }
 
   private handleError (error: Response | any) {
     // In a real world app, we might use a remote logging infrastructure
-    let errMsg: string;
-    if (error instanceof Response) {
-      const body = error.json() || '';
-      const err = body.error || JSON.stringify(body);
-      errMsg = `${error.status} - ${error.statusText || ''} ${err}`;
-    } else {
-      errMsg = error.message ? error.message : error.toString();
-    }
-    console.error(errMsg);
-    return Observable.throw(errMsg);
+    console.log("got errror from server");
+    let err = error._body;
+    
+    console.log(err);
+    return Observable.throw(err);
   }
 
 }

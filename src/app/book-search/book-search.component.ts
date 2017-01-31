@@ -36,10 +36,16 @@ export class BookSearchComponent {
       .subscribe(
         searchResult => {
           this.searchResult = searchResult;
-          //console.log(searchResult);
+          console.log(searchResult);
+          console.log("Successful");
           this.extractData();
           },
-        error => this.errorMessage = <any> error
+        error => {
+          this.errorMessage = <any> error;
+          this.resultBook = null;
+          console.log(error);
+          console.log("There was an error");
+        }
       );
   }
 

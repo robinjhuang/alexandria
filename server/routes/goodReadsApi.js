@@ -18,7 +18,7 @@ router.get('/', (req, res) => {
 });
 
 router.get('/searchBook', (req, res) => {
-	console.log(req.query);
+	//console.log(req.query);
 	axios.get(getGoodReadsURL(req.query.searchQuery), {
 		params: {
 			key: 'ppN4P4legUMzGoIC2YBpQ',
@@ -33,8 +33,8 @@ router.get('/searchBook', (req, res) => {
 			});
 		})
 		.catch(function (error) {
-			console.log(error);
-			res.status(500).send(error);
+			console.log("Got Error from goodreads");
+			res.status(error.response.status).send(error.response.statusText);
 		});
 });
 
