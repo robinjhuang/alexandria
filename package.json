@@ -5,7 +5,7 @@
   "angular-cli": {},
   "scripts": {
     "ng": "ng",
-    "start": "ng serve",
+    "start": "ng build --watch",
     "build": "ng build && nodemon server.js",
     "lint": "tslint \"src/**/*.ts\" --project src/tsconfig.json --type-check && tslint \"e2e/**/*.ts\" --project e2e/tsconfig.json --type-check",
     "test": "ng test",
@@ -36,6 +36,7 @@
     "passport-local": "^1.0.0",
     "pg": "^6.1.2",
     "pg-hstore": "^2.3.2",
+    "promise": "^7.3.0",
     "rxjs": "^5.0.1",
     "sequelize": "^3.29.0",
     "ts-helpers": "^1.1.1",

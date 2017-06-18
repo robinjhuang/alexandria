@@ -33,7 +33,7 @@ const authenticationRouter = require ('./server/routes/authenticationRouter')(pa
 const bookRouter = require('./server/routes/bookRouter');
 // Set our api routes
 app.use('/goodReadsApi', goodReadsApi);
-app.use('/authenticate', authenticationRouter);
+app.use('/authenticate/', authenticationRouter);
 app.use('/book', bookRouter);
 
 // Catch all other routes and return the index file

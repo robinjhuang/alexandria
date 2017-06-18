@@ -2,7 +2,7 @@
   "development": {
     "username": "robinhuang",
     "password": "zepper",
-    "database": "users",
+    "database": "alexandria",
     "host": "127.0.0.1",
     "dialect": "postgres"
   },
