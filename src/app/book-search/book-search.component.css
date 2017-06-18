@@ -1,7 +1,7 @@
 .searchContainer {
   width: 100%;
   vertical-align: middle;
-  text-align: center;
+  text-align: left;
   white-space: nowrap;
   position: relative;
   display: inline-block;
@@ -58,11 +58,7 @@
 /* SEARCH RESULTS STYLING */
 
 .bookSearchDisplay {
-    margin: 0 auto;
     margin-top: 40px;
-    display: block;
-    text-align: center;
-    width: 60%;
 }
 
 .bookSearchDisplay p, h1, h2, h4 {

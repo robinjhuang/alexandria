@@ -14,26 +14,25 @@ export class GoodReadsService {
    getAllPosts() {
     return this.http.get('/api/posts')
       .map(res => res.json());
+   }
+
+  searchGoodReads(queryString: string): Promise<any> {
+    let params = new URLSearchParams();
+    params.set('searchQuery', queryString);
+    return this.http.get('/goodReadsApi/searchBook', {search: params})
+          .toPromise()
+          .then(this.extractData2)
+          .catch(this.handleError2);
   }
 
-  searchGoodReads(ISBN: string): Observable<any> {
-    //console.log("The entered ISBN is: " + ISBN);
-    let params = new URLSearchParams();
-    params.set('searchQuery', ISBN);
-    return this.http.get('/goodReadsApi/searchBook', {search: params})
-          .map(this.extractData)
-          .catch(this.handleError);
-			
-	}
-
-  private extractData(res: Response) {
+  private extractData2(res: Response) {
     let body = res.json();
     console.log("returned from server");
-    console.log(body);
-    return body.GoodreadsResponse || { };
+    //console.log(body);
+    return body || { };
   }
 
-  private handleError (error: Response | any) {
+  private handleError2 (error: Response | any) {
     // In a real world app, we might use a remote logging infrastructure
     console.log("got errror from server");
     let err = error._body;

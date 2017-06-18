@@ -1,12 +1,33 @@
 
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12 searchContainer">
-      <span class="icon"><i class="fa fa-search"></i></span>
-      <input id="bookSearchBox" type="text" name="BookSearch" placeholder="Search by ISBN" #searchBox (keyup.enter)="findBookOnGoodReads(searchBox.value)">
+  <!--<div class="row">
+    <div class="col-lg-12">
+      <div class="searchContainer">
+        <span class="icon"><i class="fa fa-search"></i></span>
+        <input id="bookSearchBox" type="text" name="BookSearch" placeholder="Search by ISBN" #searchBox (keyup.enter)="findBookOnGoodReads(searchBox.value)">
+      </div>
+    </div>
+  </div> -->
+
+  <div class="row" *ngIf="resultBooks">
+    <div *ngFor="let book of resultBooks" class="col-sm-10 col-sm-offset-2 bookSearchDisplay">
+      <div class="d-flex flex-row align-items-center justify-content-center">
+        <div class="col-sm-2"> 
+          <img [src]="book.image_url" alt="Description"/>
+        </div>
+        <div class="col-sm-8 bookSearchDisplay">
+          <h4>{{book.title}} </h4>
+          <h4>by {{book.author}} </h4>
+          <p [innerHTML] = "book.description"></p>
+        </div>
+        <div class="col-sm-2 addBook">
+          <a class="btn btn-info btn-sm" href="#" role="button" (click)="addToLibrary(book)">Add to Library</a>
+          <a class="btn btn-default btn-sm" href="#" role="button">Borrow</a>
+        </div>
+      </div>
     </div>
   </div>
-  <div class="row" *ngIf="resultBook">
+  <div class="row" *ngIf="errorMessage"> {{errorMessage}}</div>
+ <!--<div class="row" *ngIf="resultBook">
     <div class="col-sm-8 bookSearchDisplay">
       <img [src]="resultBook.image_url" alt="Description" />
       <h4>Title: {{resultBook.title}} </h4>
@@ -16,6 +37,4 @@
     <div class="col-sm-4 addBook">
       <a class="btn btn-default" href="#" role="button" (click)="addToLibrary()">Add Book</a>
     </div>
-  </div>
-  <div class="row" *ngIf="errorMessage"> {{errorMessage}}</div>
-</div>
+  </div>-->

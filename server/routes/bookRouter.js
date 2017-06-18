@@ -9,6 +9,7 @@ const User = require('../models').User;
 const Book = require('../models').Book;
 router.post('/addBook', (req, res) => {
 	console.log(req.body);
+	console.log("Trying to save book");
 	Book.findOrCreate({ where: {isbn: req.body._isbn, owner: req.user.fb_id },
 		defaults: {
 			title: req.body._title,
@@ -23,12 +24,11 @@ router.post('/addBook', (req, res) => {
 			owner: req.user.fb_id,
 			checked_out: false
 
-
 		}})
 		.spread(function (book, created){
              res.status(200).json(book);
         }).error(function(err){
-            throw(err);
+            res.status(500).json(err);
         });
 	
 	
@@ -43,7 +43,7 @@ router.get('/getLibrary', function (req, res) {
 				}
 			})
 			.then((books) => {
-				console.log(books);
+				//console.log(books);
 				res.status(200).json(books);
 			})
 			.catch((error) => res.status(400).json(error));
