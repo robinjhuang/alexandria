@@ -8,7 +8,7 @@ module.exports = function(passport) {
 
     // used to serialize the user for the session
     passport.serializeUser(function(user, cb) {
-        console.log("USER.ID = " + user.fb_id);
+        //console.log("USER.ID = " + user.fb_id);
         cb(null, user);
     });
 
@@ -19,7 +19,7 @@ module.exports = function(passport) {
                 done(null, user);
             },
             function (err) {
-                console.log(err);
+                //console.log(err);
                 done(err, null);
             }
         );
@@ -40,7 +40,7 @@ module.exports = function(passport) {
 
     // facebook will send back the token and profile
     function(access_token, refreshToken, profile, done) {
-        console.log("FACEBOOK PROFILE", profile);
+        //console.log("FACEBOOK PROFILE", profile);
         // asynchronous
         process.nextTick(function() {
             User.findOrCreate({where: {fb_id: profile.id}, 
@@ -52,8 +52,13 @@ module.exports = function(passport) {
 	                profilePictureURL : profile.photos[0].value,
                     library: []
                 }})
-                .spread(function (user, created){
-                    done(null, user);
+                .spread(function(user, created){
+                    user.update({
+                        access_token: access_token,
+                        profilePictureURL : profile.photos[0].value
+                    })
+                    .then(() => done(null, user))
+                    .catch((error) => res.status(400).send(error));
                 }).error(function(err){
                     throw(err);
                 });

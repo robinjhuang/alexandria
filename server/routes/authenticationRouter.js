@@ -9,10 +9,19 @@ function isLoggedIn (req, res, next) {
 }
 
 module.exports = function (passport){
-	router.get('/isLoggedIn', isLoggedIn, 
+	router.get('/getUser', isLoggedIn, 
 		function(req, res) {
+			//console.log(req.user);
 			res.json({user: req.user});
 	});
+
+	router.get('/isLoggedIn', function(req, res) {
+		if (req.isAuthenticated()) {
+			res.send(true);
+		}
+		else
+			res.send(false);
+	})
 
 	// route for facebook authentication and login
 	router.get('/facebook', passport.authenticate('facebook', { scope : ['email'] }));
