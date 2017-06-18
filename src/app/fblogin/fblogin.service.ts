@@ -3,18 +3,24 @@ import { Headers, Http, Response, URLSearchParams, QueryEncoder } from '@angular
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
+import 'rxjs/add/observable/throw';
 import { Observable }     from 'rxjs/Observable';
 
 @Injectable()
 export class FbloginService {
-    private isLoggedIn: boolean;
     private user: any;
     constructor(private http: Http) { }
 
     getUser(): Observable<any> {
-        return this.http.get('/authenticate/isLoggedIn')
+        return this.http.get('/authenticate/getUser')
           .map(this.extractData)
           .catch(this.handleError);
+    }
+
+    isLoggedIn(): Observable<Boolean> {
+        return this.http.get('/authenticate/isLoggedIn')
+          .map((res) => res.json())
+          .catch((err) => Observable.throw(err.statusText));
     }
 
     private extractData(res: Response) {
