@@ -13,23 +13,29 @@ import { FbloginComponent } from './fblogin/fblogin.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MainNavComponent } from './main-nav/main-nav.component';
 import { BookComponent } from './book-search/book/book.component';
+import { ProfileNaviconComponent } from './profile-navicon/profile-navicon.component';
 /* Services */
 import { FbloginService } from './fblogin/fblogin.service';
 import { GoodReadsService } from './goodreads.service';
 import { BookService } from './book-search/book/book.service';
+import { AuthGuard } from './authGuard/auth-guard';
 // Define the routes
 const ROUTES = [
   {
-    path: '',
-    component: FbloginComponent,
-    pathMatch: 'full'
+    path: 'search',
+    component: BookSearchComponent
   },
   {
     path: 'profile',
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'posts',
+    component: BookSearchComponent
+  },
+  {
+    path: '*',
     component: BookSearchComponent
   }
 ];
@@ -40,7 +46,9 @@ const ROUTES = [
     BookSearchComponent,
     FbloginComponent,
     ProfileComponent,
-    BookComponent
+    BookComponent,
+    MainNavComponent,
+    ProfileNaviconComponent
   ],
   imports: [
     BrowserModule,
@@ -50,7 +58,7 @@ const ROUTES = [
     RouterModule.forRoot(ROUTES),
     MaterialModule.forRoot()
   ],
-  providers: [GoodReadsService, FbloginService, BookService],
+  providers: [GoodReadsService, FbloginService, BookService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
