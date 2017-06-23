@@ -19,7 +19,6 @@ function flatMap (array, callback) {
 
 function getGoodReadIds(response) {
 	var goodReadsIds = flatMap(response.GoodreadsResponse.search[0].results, function(ele) {
-		//console.log(ele);
 		return flatMap(ele.work, function(el) {
 			return el.best_book[0].id[0]._;
 		});
@@ -51,23 +50,22 @@ function getBookData(id) {
 			parseString(response.data, function parseGoodReadResponse(err, response) {
 				if (!err) {
 					var book = response.GoodreadsResponse.book[0];
-					// console.log(book.authors);
 					var obj = {
-						"title": book.title[0],
-						"isbn": book.isbn13[0] || book.isbn[0],
-						"url": book.image_url[0],
+						"title": book.title[0] || "",
+						"isbn": book.isbn13[0] || book.isbn[0] || "",
+						"url": book.image_url[0] || "",
 						"description": book.description[0] || "",
 						"author": book.authors[0].author[0].name[0] || "",
 						"avg_rating": book.average_rating[0] || "",
-						"num_pages": book.num_pages[0],
-						"gr_url": book.url[0]
+						"num_pages": book.num_pages[0] || "",
+						"gr_url": book.url[0] || ""
 					};
 					// console.log(obj);
 					searchRes = obj;
 				}
 			});
-			console.log("found search res");
-			console.log(searchRes);
+			//console.log("found search res");
+			//console.log(searchRes);
 			resolve(searchRes);
 		})
 		.catch(function(error) {
