@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Headers, Http, Response, URLSearchParams, QueryEncoder } from '@angular/http';
+import { Headers, Http, Response, URLSearchParams, QueryEncoder, RequestOptions } from '@angular/http';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/toPromise';
 import 'rxjs/add/operator/catch';
@@ -23,9 +23,22 @@ export class FbloginService {
           .catch((err) => Observable.throw(err.statusText));
     }
 
+    saveAddress(address: Object): Observable<Boolean> {
+      //console.log(address);
+      let body = JSON.stringify(address);
+      let headers = new Headers({ 'Content-Type': 'application/json' });
+      let options = new RequestOptions({ headers: headers });
+      return this.http.post('/user/addAddress', address, options)
+        .map( (res:Response) => {
+          console.log(res); 
+          return true;
+        })
+        .catch(this.handleError);
+    }
+
     private extractData(res: Response) {
         let body = res.json();
-        console.log("extracting data" + body);
+        //console.log("extracting data" + body);
         return body.user || { };
     }
 
