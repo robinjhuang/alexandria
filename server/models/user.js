@@ -7,6 +7,10 @@ module.exports = function(sequelize, DataTypes) {
     last_name: DataTypes.STRING,
     email: DataTypes.TEXT,
     profilePictureURL: DataTypes.TEXT,
+    address_1: DataTypes.TEXT,
+    city: DataTypes.STRING,
+    zip: DataTypes.STRING,
+    country: DataTypes.STRING,
     library: DataTypes.ARRAY(DataTypes.STRING)
   }, {
     underscored: true,

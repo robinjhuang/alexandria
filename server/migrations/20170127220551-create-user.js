@@ -26,6 +26,18 @@ module.exports = {
       profilePictureURL: {
         type: Sequelize.TEXT
       },
+      address_1: {
+        type: Sequelize.TEXT 
+      },
+      city: {
+        type: Sequelize.STRING 
+      },
+      zip: { 
+        type: Sequelize.STRING
+      },
+      country: { 
+        type: Sequelize.STRING 
+      },
       library: {
         type: Sequelize.ARRAY(Sequelize.STRING)
       },
