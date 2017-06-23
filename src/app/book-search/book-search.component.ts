@@ -31,12 +31,9 @@ export class BookSearchComponent implements OnInit {
 		this.goodReadsService.searchGoodReads(ISBN)
       .then(
         searchResult => {
-          // console.log(searchResult);
           this.searchResult = searchResult;
-          
           this.zone.run( () => {
             this.resultBooks = this.searchResult.map(function (book) {
-              console.log(book);
               return new Book(book.title, book.author, book.isbn, book.isbn, book.description, book.url, book.avg_rating, book.num_pages, null, book.gr_url, null, null, null, null, null);
             });
           });
