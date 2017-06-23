@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
 import { FbloginService } from '../fblogin/fblogin.service';
 import { BookService } from '../book-search/book/book.service';
 import { Book } from '../book-search/book/book';
@@ -17,6 +18,14 @@ export class ProfileComponent implements OnInit {
     private Library: Book[];
     errorMessage: any;
 
+    private address: any = {
+        address: "",
+        city: "",
+        zip: ""
+    }; 
+    private submitted: Boolean;
+    
+
     constructor(private fbloginService: FbloginService, private bookService: BookService) {
         this.UserPictureURL = "";
         this.UserFirstName = "";
@@ -24,8 +33,17 @@ export class ProfileComponent implements OnInit {
         
     }
 
+    onSubmit(form: any) {
+        console.log("submitted");
+        this.fbloginService.saveAddress(form)
+            .subscribe(
+                result => {console.log(result);},
+                error => console.log(error)
+            );
+    }
+
     ngOnInit () {
-        console.log('here');
+        //console.log('here');
         this.fbloginService.getUser()
             .subscribe(
                 user => {
@@ -38,7 +56,7 @@ export class ProfileComponent implements OnInit {
         this.bookService.getLibrary()
             .subscribe(
                 library => {
-                    console.log(JSON.stringify(library));
+                    //console.log(JSON.stringify(library));
                     this.Library = library;
                 },
                 error => this.errorMessage = <any> error
@@ -48,8 +66,11 @@ export class ProfileComponent implements OnInit {
     }
 
     extractData(): void {
+        //console.log(this.User);
         this.UserPictureURL = this.User.profilePictureURL;
         this.UserFirstName = this.User.first_name;
         this.UserLastName = this.User.last_name;
+        if (!this.User.address_1)
+            this.submitted = false; 
     }
 }

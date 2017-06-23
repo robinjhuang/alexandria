@@ -2,23 +2,56 @@
     <article class="profile">
         <div class="row" *ngIf="User"> 
             <header class="profileHeader">
-                <div class="profilePictureWrapper1 col-sm-3 col-sm-offset-1">
+                <div class="profilePictureWrapper1">
                     <div class="profilePictureWrapper2">
                         <button class="changeProfilePicture" title="Change profile photo">
                             <img [src]="UserPictureURL" alt="Description" />
                         </button>
                     </div>
                 </div>
-                <div class="profileDetails col-sm-8">
-                        <div><h1 id="profileName"> {{UserFirstName}} {{UserLastName}}</h1></div>
-                        <div><a class="editProfileForm" href="/accounts/edit">
-                            <span><button>Edit Profile</button></span></a>
-                        </div>
-                        <div class="dotdotdot"><a class="btn btn-default btn-sm" href="#"><i class="fa fa-cog"></i> Settings</a></div>
+                <div class="profileDetails flex-row">
+                    <div><h1 id="profileName"> {{UserFirstName}} {{UserLastName}}</h1></div>
+                    <div><a class="editProfileForm" href="/accounts/edit">
+                        <span><button>Edit Profile</button></span></a>
+                    </div>
+                    <div class="dotdotdot"><a href="#"><i class="fa fa-cog"></i> Settings</a></div>
                 </div> 
             </header>
         </div>
     </article>
+    <div *ngIf="User" class="card d-flex col-lg-6 col-sm-12"> 
+        <div *ngIf="!submitted" class="card-block">
+            <div class="text-center">
+                <h3><i class="fa fa-home"></i> What's Your Address?</h3>
+                <hr class="mt-2 mb-2">
+            </div>
+            <p>Please provide an address so your friends can borrow books from you :)</p>
+            <br>
+            <form #addressForm="ngForm" (ngSubmit)="onSubmit(addressForm.value)">
+                <div class="md-form">
+                    <i class="fa fa-address-card prefix"></i>
+                    <input type="text" id="address1" class="form-control" 
+                        name="address" [(ngModel)]="address.address">
+                    <label for="address1">Address</label>
+                </div>
+                <div class="md-form">
+                    <i class="fa fa-address-card prefix"></i>
+                    <input type="text" id="city" class="form-control" 
+                        name="city" [(ngModel)]="address.city">
+                    <label for="city">City</label>
+                </div>
+                <div class="md-form">
+                    <i class="fa fa-address-card prefix"></i>
+                    <input type="text" id="zipCode" class="form-control" 
+                        name="zip" [(ngModel)]="address.zip">
+                    <label for="zipCode">Zip Code</label>
+                </div>
+                <div class="text-center">
+                    <button class="btn btn-primary" type="submit">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
     <article class="profile">
         <div class="row">
             <div class="col-sm-12 myLibrary md-app-background">  
@@ -30,8 +63,6 @@
                     </md-tab>
                     <md-tab class="libTab" label="Lent Out">Content 2</md-tab>
                 </md-tab-group>
-                
-
             </div>
         </div>   
     </article>   
