@@ -8,11 +8,11 @@ function isLoggedIn (req, res, next) {
     res.redirect('/')
 }
 
-module.exports = function (passport){
+module.exports = function (passport) {
 	router.get('/getUser', isLoggedIn, 
 		function(req, res) {
-			//console.log(req.user);
-			res.json({user: req.user});
+			console.log(req.sessionID);
+			res.status(200).json({user: req.user});
 	});
 
 	router.get('/isLoggedIn', function(req, res) {
@@ -21,10 +21,10 @@ module.exports = function (passport){
 		}
 		else
 			res.send(false);
-	})
+	});
 
 	// route for facebook authentication and login
-	router.get('/facebook', passport.authenticate('facebook', { scope : ['email'] }));
+	router.get('/facebook', passport.authenticate('facebook', { scope : ['email']}));
 
 	// handle the callback after facebook has authenticated the user
 	router.get('/facebook/callback',

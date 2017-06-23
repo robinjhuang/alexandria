@@ -12,15 +12,20 @@ const app = express();
 
 // Point static path to dist
 app.use(express.static(path.join(__dirname, 'dist')));
+app.use(cookieParser('foo'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
-// Configuring Passport
-app.use(cookieParser());
 app.use(session({
-    secret: 'knowledgeIsPower', // session secret
+    secret: 'foo', // session secret
+    cookie: {
+        secure: false,
+        expires: false,
+        httpOnly: false
+    },
     saveUninitialized: true,
-    resave: true
+    resave: false
 }));
+// Configuring Passport
 app.use(passport.initialize());
 app.use(passport.session());
 
@@ -31,15 +36,26 @@ require('./server/config/passport')(passport);
 const goodReadsApi = require('./server/routes/goodReadsApi');
 const authenticationRouter = require ('./server/routes/authenticationRouter')(passport);
 const bookRouter = require('./server/routes/bookRouter');
+const closestBooksRouter = require('./server/routes/closestBooksRouter');
+const userRouter = require('./server/routes/userRouter');
 // Set our api routes
 app.use('/goodReadsApi', goodReadsApi);
 app.use('/authenticate/', authenticationRouter);
-app.use('/book', bookRouter);
 
+app.use('/user', userRouter);
+app.use('/book', bookRouter);
+app.use('/closestBook', closestBooksRouter);
+
+app.get('/checkSession', (req, res) => {
+  console.log(req.sessionID);
+  res.send("okay");
+});
 // Catch all other routes and return the index file
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/index.html'));
 });
+
+
 
 /**
  * Get port from environment and store in Express.
