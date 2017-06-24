@@ -5,12 +5,12 @@
                 <div class="profilePictureWrapper1">
                     <div class="profilePictureWrapper2">
                         <button class="changeProfilePicture" title="Change profile photo">
-                            <img [src]="UserPictureURL" alt="Description" />
+                            <img [src]="User.profilePictureURL" alt="Description" />
                         </button>
                     </div>
                 </div>
                 <div class="profileDetails flex-row">
-                    <div><h1 id="profileName"> {{UserFirstName}} {{UserLastName}}</h1></div>
+                    <div><h1 id="profileName"> {{User.first_name}} {{User.last_name}}</h1></div>
                     <div><a class="editProfileForm" href="/accounts/edit">
                         <span><button>Edit Profile</button></span></a>
                     </div>
@@ -19,8 +19,8 @@
             </header>
         </div>
     </article>
-    <div *ngIf="User" class="card d-flex col-lg-6 col-sm-12"> 
-        <div *ngIf="!submitted" class="card-block">
+    <div *ngIf="!hasAddress" class="card d-flex col-lg-6 col-sm-12"> 
+        <div class="card-block">
             <div class="text-center">
                 <h3><i class="fa fa-home"></i> What's Your Address?</h3>
                 <hr class="mt-2 mb-2">

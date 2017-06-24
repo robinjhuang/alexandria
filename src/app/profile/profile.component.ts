@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgZone } from '@angular/core';
 import { FormControl, FormGroup } from '@angular/forms';
 import { FbloginService } from '../fblogin/fblogin.service';
 import { BookService } from '../book-search/book/book.service';
@@ -12,24 +12,17 @@ import { BookComponent } from '../book-search/book/book.component';
 
 export class ProfileComponent implements OnInit {
     User: any;
-    private UserPictureURL: String;
-    private UserFirstName: String;
-    private UserLastName: String;
     private Library: Book[];
     errorMessage: any;
-
+    private hasAddress: Boolean;
     private address: any = {
         address: "",
         city: "",
         zip: ""
     }; 
-    private submitted: Boolean;
     
-
-    constructor(private fbloginService: FbloginService, private bookService: BookService) {
-        this.UserPictureURL = "";
-        this.UserFirstName = "";
-        this.UserLastName = "";
+    
+    constructor(private fbloginService: FbloginService, private bookService: BookService, private zone: NgZone) {
         
     }
 
@@ -37,18 +30,20 @@ export class ProfileComponent implements OnInit {
         console.log("submitted");
         this.fbloginService.saveAddress(form)
             .subscribe(
-                result => {console.log(result);},
+                (result) => {
+                    this.zone.run( () => {
+                        this.hasAddress = result;
+                    });
+                },
                 error => console.log(error)
             );
     }
 
     ngOnInit () {
-        //console.log('here');
         this.fbloginService.getUser()
             .subscribe(
                 user => {
-                    this.User = user;
-                    this.extractData();
+                    this.extractData(user);
                 },
                 error => this.errorMessage = <any> error
             );
@@ -65,12 +60,13 @@ export class ProfileComponent implements OnInit {
         
     }
 
-    extractData(): void {
-        //console.log(this.User);
-        this.UserPictureURL = this.User.profilePictureURL;
-        this.UserFirstName = this.User.first_name;
-        this.UserLastName = this.User.last_name;
-        if (!this.User.address_1)
-            this.submitted = false; 
+    extractData(user): void {
+        this.zone.run(() =>{
+            this.User = user;
+            console.log(user);
+            if (this.User.address_1){
+                this.hasAddress = true;
+            }
+        });
     }
 }
